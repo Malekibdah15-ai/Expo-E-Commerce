@@ -3,6 +3,8 @@ import path from 'path';
 import { ENV } from './config/env.js';
 import connectDB from './config/db.js';
 import { clerkMiddleware } from '@clerk/express'
+import {server} from 'inggest/express';
+import { inngest,functions } from './config/inggest.js';
 const app = express();
 
 const __dirname = path.resolve();
@@ -10,7 +12,11 @@ app.get('/api/data', (req, res) =>{
     res.json({ message: 'Hello from the backend!' });
 })
 
+app.use(express.json());
 app.use(clerkMiddleware());
+app.use("/api/ingest", server({client: inngest, functions: functions}));
+
+
 // deployment
 if(ENV.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname, '../admin/dist'))); 
