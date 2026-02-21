@@ -1,10 +1,15 @@
-import {inggest} from 'inggest';
+import {Inngest} from 'inngest';
 import connectDb from './db.js';
-import {User} from '../models/user.js';
-import e from 'cors';
+import {User} from '../models/user.model.js';
 
 
-export const inngest = new inngest({id: "ecommerce-app"});
+
+export const inngest = new Inngest(
+    {id: "ecommerce-app",
+    signingKey: process.env.INNGEST_SIGNING_KEY
+    }
+
+);
 
 const syncUser = inngest.createFunction(
     {id: "sync-user"},
@@ -25,7 +30,7 @@ const syncUser = inngest.createFunction(
     }
 )
 
-const deleteUserFromDb = inggest.createFunction(
+const deleteUserFromDb = inngest.createFunction(
     {id: "delete-user"},
     {event: "clerk/user.deleted"},
     async ({event}) =>{
@@ -35,4 +40,4 @@ const deleteUserFromDb = inggest.createFunction(
     }
 )
 
-export const functions = {syncUser, deleteUserFromDb};
+export const functions = [syncUser, deleteUserFromDb];
