@@ -1,7 +1,8 @@
-import {Route} from "express"
+import express from "express"
 import { protectRoute } from '../middleware/auth.middleware.js';
 import {getCart,createCart, updateCart, deleteCart, clearCart} from '../controllers/cart.controller.js'
-const router = Route();
+
+const router = express.Router();
 
 router.use(protectRoute)
 
