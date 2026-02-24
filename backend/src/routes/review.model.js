@@ -1,10 +1,10 @@
 import {Router} from "express"
-import { protectRoute } from '../middleware/auth.middleware.js';
+// import { protectRoute } from '../middleware/auth.middleware.js';
 import {createReview } from "../controllers/review.controller.js";
 
 const router = Router();
 
-router.use(protectRoute)
+// router.use(protectRoute)
 
 router.post("/", createReview)
 

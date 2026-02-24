@@ -13,30 +13,27 @@ function DashboardPage() {
     queryKey: ["dashboard"],
     queryFn: dashboardData.getData
   })
-  const recentOrders = ordersData.orders
-            // totalOrders,
-            // totalRevenue,   
-            // totalCoustomers,
-            // totalProducts,
+  const recentOrders =  ordersData || [];
+
   const statusCards = [
     {
       name: "Total Revenu",
-      value: dashboardLoading ? "..." : dashboardStatus.totalRevenue,
+      value: dashboardLoading ? "..." : dashboardStatus?.totalRevenue,
       icon: <DollarSignIcon className='h-8 w-8'/>
     },
     {
       name: "Total Orders",
-      value: dashboardLoading ? "..." : dashboardStatus.totalOrders,
+      value: dashboardLoading ? "..." : dashboardStatus?.totalOrders,
       icon: <ShoppingBagIcon className='h-8 w-8'/>
     },
     {
       name: "Total Cutomers",
-      value: dashboardLoading ? "..." : dashboardStatus.totalCoustomers,
+      value: dashboardLoading ? "..." : dashboardStatus?.totalCoustomers,
       icon: <UserIcon className='h-8 w-8'/>
     },
     {
-      name: "Total Cutomers",
-      value: dashboardLoading ? "..." : dashboardStatus.totalProducts,
+      name: "Total Products",
+      value: dashboardLoading ? "..." : dashboardStatus?.totalProducts,
       icon: <PackageIcon className='h-8 w-8'/>
     },
   ]

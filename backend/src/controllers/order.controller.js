@@ -31,6 +31,7 @@ export async function createOrder(req, res) {
         }
         res.status(201).json({message: "order added successfully", order})
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
 }
@@ -50,7 +51,9 @@ export async function getUserOrder(req, res) {
         )
 
         res.status(201).json({orders: orderReviewStatus})
-    }catch{
+    }catch(error)
+    {
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
     
