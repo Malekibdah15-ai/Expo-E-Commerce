@@ -17,7 +17,7 @@ function App() {
   return (
     <>
      <Routes>
-      <Route path="/login" element={isSignedIn ? <Navigate to= {"/dashpoard"}/> :<LoginPage />}/>
+      <Route path="/login" element={isSignedIn ? <Navigate to= {"/dashboard"}/> :<LoginPage />}/>
       <Route path='/' element = {isSignedIn ? <DashboardLayout/> : <Navigate to = {"/login" }/>} >
       <Route index element= {<Navigate to={"dashboard"}/>}/>
       <Route path='dashboard' element={<DashboardPage/>}/>
