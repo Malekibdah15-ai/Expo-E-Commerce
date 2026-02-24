@@ -1,9 +1,9 @@
 import React from 'react'
-import {LouderIcon} from 'lucide-react' 
+import { Loader } from "lucide-react"
 function PageLouder() {
   return (
     <div className='flex items-center justify-center h-screen'>
-      <LouderIcon className='size-12 animate-spin'/>
+      <Loader className='size-12 animate-spin'/>
       
     </div>
   )
