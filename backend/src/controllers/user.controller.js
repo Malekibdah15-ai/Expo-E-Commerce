@@ -24,6 +24,7 @@ export async function addAddreses(req, res) {
 
         res.status(201).json({message: "addres added sucsufully", addreses: user.addreses})
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
 
@@ -34,6 +35,7 @@ export async function getAddreses(req, res) {
         res.status(200).json( {addreses: user.addreses})
 
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
     
@@ -65,6 +67,7 @@ export async function updateAddreses(req, res) {
         res.status(200).json({message: "addresses added sucsufully"})
 
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
     
@@ -77,6 +80,7 @@ export async function deleteAddreses(req, res) {
         await user.save()
         res.status(201).json({message: "address deleted sucsufully", addreses: user.addreses})
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
 }
@@ -92,6 +96,7 @@ export async function addToWishlist(req, res) {
         await user.save()
         res.status(200).json({message: "product added sucsufully", wishlist: user.wishlist})
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
     

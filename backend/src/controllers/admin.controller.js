@@ -28,21 +28,24 @@ export async function createProduct(req, res) {
             price: parseFloat(price),
             category,
             stock: parseInt(stock),
-            imageUrl: imageUrls,
+            images: imageUrls,
         })
         res.status(201).json(product);
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
 }
 
-export async function getAllProducts(req, res) {
-    try{
-        const products = await Product.find();
-        res.status(200).json(products);
-    }catch(error){
-        return res.status(500).json({message: "Internal server error"});
-    }
+export async function getAllProducts(_, res) {
+  try {
+    // -1 means in desc order: most recent products first
+    const products = await Product.find().sort({ createdAt: -1 });
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 }
 
 export async function updateProduct(req, res) {
@@ -74,6 +77,7 @@ export async function updateProduct(req, res) {
         await product.save();
         res.status(200).json(product);
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }   
 }
@@ -81,11 +85,12 @@ export async function updateProduct(req, res) {
 export async function getAllOrders(req, res) {
     try{
         const orders = await Order.find()
-        .populate("userId", "name email")
-        .populate("products.productId");
-        sort({ createdAt: -1 });
+            .populate("userId", "name email")
+            .populate("products.productId")
+            .sort({ createdAt: -1 });
         res.status(200).json(orders);
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }       
 }
@@ -107,6 +112,7 @@ export async function updateOrderStatus(req, res) {
         await order.save();
         res.status(200).json(order); 
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }   
 }
@@ -116,6 +122,7 @@ export async function getAllCustomers(req, res) {
         const customers = await User.find().sort({ createdAt: -1 })                                                                         ;
         res.status(200).json(customers);
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }   
 }
@@ -141,6 +148,34 @@ export async function getDashboardStatus(req, res) {
             totalProducts,
         });
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }   
+}
+
+export async function deleteProduct(req, res){
+    try {
+    const { id } = req.params;
+
+    const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    // Delete images from Cloudinary
+    if (product.images && product.images.length > 0) {
+      const deletePromises = product.images.map((imageUrl) => {
+        // Extract public_id from URL (assumes format: .../products/publicId.ext)
+        const publicId = "products/" + imageUrl.split("/products/")[1]?.split(".")[0];
+        if (publicId) return cloudinary.uploader.destroy(publicId);
+      });
+      await Promise.all(deletePromises.filter(Boolean));
+    }
+
+    await Product.findByIdAndDelete(id);
+    res.status(200).json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    res.status(500).json({ message: "Failed to delete product" });
+  }
 }

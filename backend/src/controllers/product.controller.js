@@ -8,6 +8,7 @@ export async function getProduct(req, res) {
         }
         res.status(200).json(product)
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
 }

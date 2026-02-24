@@ -14,6 +14,7 @@ export async function getCart(req, res) {
         res.status(200).json(cart)
 
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
     
@@ -52,6 +53,7 @@ export async function createCart(req, res) {
         await cart.save()
         res.status(200).json({message: "cart is added succssufly"}, cart)
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({err: "Internal server error"});
     }   
 }
@@ -83,6 +85,7 @@ export async function updateCart(req, res) {
         res.status(400).json({message: "cart updated successuflly"}, cart)
 
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({err: "Internal server error"});
     }   
 }
@@ -98,6 +101,7 @@ export async function deleteCart(req, res) {
         res.status(401).json({message: "cart items id deleted"}, cart)
 
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({err: "Internal server error"});
     }   
 }
@@ -112,6 +116,7 @@ export async function clearCart(req, res) {
         res.status(401).json({message: "cart cleared"}, cart)
 
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({err: "Internal server error"});
     }    
 }

@@ -45,6 +45,7 @@ export async function createReview(req, res) {
         res.status(201).json({message: "review succissfuly created ", review})
 
     }catch(error){
+        console.error("Error fetching products:", error);
         return res.status(500).json({message: "Internal server error"});
     }
 }
