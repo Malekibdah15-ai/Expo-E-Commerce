@@ -24,7 +24,7 @@ export const productApi = {
 } 
 
 export const orderApi = {
-    gatAll: async()=>{
+    getAll: async()=>{
         const {data} = await axiosInstance.get("/admin/orders");
         return data
     },
