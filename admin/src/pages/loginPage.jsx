@@ -1,16 +1,9 @@
 import React from 'react'
-
+import { SignIn } from "@clerk/clerk-react";
 function LoginPage() {
   return (
-    <div>
-      <h1>Hello Admin</h1>
-      <SignedOut>
-        <SignInButton mode="modal" />
-      </SignedOut>
-      {/* Show the user button when the user is signed in */}
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+    <div className='min-h-screen flex justify-center items-center'>
+      <SignIn />
     </div>
   )
 }

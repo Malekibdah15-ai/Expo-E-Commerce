@@ -6,7 +6,7 @@ import { capitalizeText, formatDate, getOrderStatusBadge } from "../lib/utils";
 function DashboardPage() {
   const {data:ordersData, isLoading: ordersLoading} = useQuery({
     queryKey: ["orders"],
-    queryFn: orderApi.gatAll,
+    queryFn: orderApi.getAll,
   });
   
   const {data:dashboardStatus, isLoading: dashboardLoading} = useQuery({
@@ -51,6 +51,13 @@ function DashboardPage() {
           </div>
         ))}
       </div>
+      <button
+      onClick={() => {
+        throw new Error('This is your first error!');
+      }}
+    >
+      Break the world
+    </button>
 
       
       <div className="card bg-base-100 shadow-xl">
