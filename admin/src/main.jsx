@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { QueryClient, QueryClientProvider,} from '@tanstack/react-query'
 import {BrowserRouter} from 'react-router'
+import * as Sentry from "@sentry/react";
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
@@ -13,6 +14,20 @@ if (!PUBLISHABLE_KEY) {
 }
 
 const queryClient = new QueryClient()
+
+
+Sentry.init({
+  dsn: "https://c4f447267f06ab88cb8dbc51ee296aef@o4510944091570176.ingest.us.sentry.io/4510944094191616",
+  // Setting this option to true will send default PII data to Sentry.
+  // For example, automatic IP address collection on events
+  sendDefaultPii: true,
+  enableLogs: true,
+
+  integrations: [Sentry.replayIntegration()],
+  // Session Replay
+  replaysSessionSampleRate: 1.0, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
+  replaysOnErrorSampleRate: 1.0,
+});
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
