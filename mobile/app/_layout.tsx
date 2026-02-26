@@ -3,11 +3,13 @@ import "../global.css"
 import {QueryClient,QueryClientProvider,  } from "@tanstack/react-query"
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { tokenCache } from '@clerk/clerk-expo/token-cache'
-const queryClient = new QueryClient
+const queryClient = new QueryClient()
 export default function RootLayout() {
-  <ClerkProvider tokenCache={tokenCache}>
+  return(
+    <ClerkProvider tokenCache={tokenCache}>
     <QueryClientProvider client={queryClient}>
-      return <Stack screenOptions={{headerShown: false}}/>;
+      <Stack screenOptions={{headerShown: false}}/>;
     </QueryClientProvider>
   </ClerkProvider>
+  )
 }
