@@ -5,12 +5,12 @@ import { useAuth, useUser } from "@clerk/clerk-expo";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { Ionicons } from "@expo/vector-icons";
-// import { router } from "expo-router";
+import { router } from "expo-router";
 
 const MENU_ITEMS = [
   { id: 1, icon: "person-outline", title: "Edit Profile", color: "#3B82F6", action: "/profile" },
   { id: 2, icon: "list-outline", title: "Orders", color: "#10B981", action: "/orders" },
-  { id: 3, icon: "location-outline", title: "Addresses", color: "#F59E0B", action: "/addresses" },
+  { id: 3, icon: "location-outline", title: "Addresses", color: "#F59E0B", action: "/addreses" },
   { id: 4, icon: "heart-outline", title: "Wishlist", color: "#EF4444", action: "/wishlist" },
 ] as const;
 const profile = () => {
@@ -18,7 +18,8 @@ const profile = () => {
   const {user} = useUser()
 
   const handleMenuPress = (action:(typeof MENU_ITEMS)[number]["action"])=>{
-    if(action === "/profile") return
+    if(action === "/profile") return;
+    router.push(action)
   }
   return (
     <SafeScreen>

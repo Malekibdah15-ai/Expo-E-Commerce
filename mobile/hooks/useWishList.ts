@@ -4,7 +4,7 @@ import { Product } from "@/types/indexT";
 const useWishlist = () => {
   const api = APIFUNC()  
   const queryClient = useQueryClient();
-
+  
   const {
     data: wishlist,
     isLoading,
