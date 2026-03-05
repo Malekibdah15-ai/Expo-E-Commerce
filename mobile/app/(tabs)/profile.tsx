@@ -64,6 +64,7 @@ const profile = () => {
             className='bg-surface rounded-2xl p-6 items-center justify-center'
             style={{width: "48%"}}
             activeOpacity={0.7}
+            onPress={()=> handleMenuPress(item.action)}
             >
               <View 
               className='rounded-full w-16 h-16 p-6 items-center justify-center'
