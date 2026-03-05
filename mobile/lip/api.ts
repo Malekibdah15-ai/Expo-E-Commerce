@@ -28,9 +28,6 @@ export const APIFUNC  = () => {
 
       return config;
     });
-
-    // cleanup: remove interceptor when component unmounts
-
     return () => {
       api.interceptors.request.eject(interceptor);
     };

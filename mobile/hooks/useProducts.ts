@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Product } from '@/types/indexT';
 
 const useProducts = () => {
-    const api = APIFUNC()  // ✅ call it directly, it's a hook
+    const api = APIFUNC()  
 
     const result = useQuery({
         queryKey: ["products"],
