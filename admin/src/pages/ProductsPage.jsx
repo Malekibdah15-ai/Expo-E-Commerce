@@ -20,13 +20,13 @@ function ProductsPage() {
 
   const queryClient = useQueryClient();
 
-  // fetch some data
+  
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: productApi.getAll,
   });
 
-  // creating, update, deleting
+  
   const createProductMutation = useMutation({
     mutationFn: productApi.create,
     onSuccess: () => {
