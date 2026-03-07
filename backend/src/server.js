@@ -12,6 +12,7 @@ import orderRoutes from './routes/order.model.js'
 import reviewRoutes from './routes/review.model.js'
 import productRoutes from './routes/product.model.js'
 import cartRoutes from './routes/cart.model.js'
+import paymentRoute from './routes/payment.model.js'
 
 const app = express();
 
@@ -48,6 +49,8 @@ app.use("/api/orders", orderRoutes)
 app.use("/api/reviews", reviewRoutes)
 app.use("/api/product", productRoutes)
 app.use("/api/cart", cartRoutes)
+app.use("/api/payment", paymentRoute)
+
 app.listen(ENV.PORT, () => {
   console.log(`Server is running on portddddddd ${ENV.PORT}`);
   connectDB();
